@@ -1,3 +1,3 @@
 # portswigger-web-academy
 
-Somes notes and samples I used while doing PortSwigger Web Academy.
+Somes notes and samples I created while doing PortSwigger Web Academy.
